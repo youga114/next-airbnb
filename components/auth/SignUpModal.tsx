@@ -18,6 +18,7 @@ import PasswordWarning from "./PasswordWarning";
 import { authActions } from "../../store/auth";
 
 const Container = styled.form`
+    position: relative;
     width: 568px;
     height: 614px;
     padding: 32px;

@@ -5,7 +5,6 @@ import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import Link from "next/link";
 import palette from "../styles/palette";
 import useModal from "../hooks/useModal";
-import SignUpModal from "./auth/SignUpModal";
 import { useSelector } from "../store";
 import HamburgerIcon from "../public/static/svg/header/hamburger.svg";
 import { useDispatch } from "react-redux";

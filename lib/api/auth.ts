@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./";
 import { UserType } from "../../types/user";
 
 interface ISignUpAPIBody {
@@ -11,3 +11,6 @@ interface ISignUpAPIBody {
 
 export const signupAPI = (body: ISignUpAPIBody) =>
     axios.post<UserType>("/api/auth/signup", body);
+export const loginAPI = (body: { email: string; password: string }) =>
+    axios.post<UserType>("/api/auth/login", body);
+export const meAPI = () => axios.get<UserType>("/api/auth/me");
