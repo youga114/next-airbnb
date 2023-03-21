@@ -126,7 +126,6 @@ const Selector: React.FC<IProps> = ({
     ...props
 }) => {
     const validateMode = useSelector((state) => state.common.validateMode);
-
     return (
         <Container
             isValid={!!isValid}
@@ -134,6 +133,7 @@ const Selector: React.FC<IProps> = ({
             type={type}
         >
             <label>
+                {label && <span>{label}</span>}
                 <select {...props}>
                     {disabledOptions.map((option, index) => (
                         <option key={index} value={option} disabled>
