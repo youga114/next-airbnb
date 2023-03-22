@@ -8,8 +8,8 @@ import { getNumber } from "../../lib/utils";
 import Selector from "../common/Selector";
 import { bedroomCountList } from "../../lib/staticData";
 import { useSelector } from "../../store";
-import Button from "../common/Button";
-import RegisterRoomBedTypes from "./RegisterRoomBedTypes";
+import RegisterRoomBedList from "./RegisterRoomBedList";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
     padding: 62px 30px 100px;
@@ -49,9 +49,6 @@ const Container = styled.div`
         max-width: 400px;
         word-break: keep-all;
     }
-    .register-room-bed-type-list-wrapper {
-        width: 548px;
-    }
 `;
 
 const RegisterRoomBedrooms: React.FC = () => {
@@ -83,8 +80,6 @@ const RegisterRoomBedrooms: React.FC = () => {
         dispatch(registerRoomActions.setMaximunGuestCount(value));
     };
 
-    const bedList = useSelector((state) => state.registerRoom.bedList);
-
     return (
         <Container>
             <h2>숙소에 얼마나 많은 인원이 숙박할 수 있나요?</h2>
@@ -107,6 +102,7 @@ const RegisterRoomBedrooms: React.FC = () => {
                     onChange={onChangeBedroomCount}
                     label="게스트가 사용할 수 있는 침실은 몇 개인가요?"
                     options={bedroomCountList}
+                    isValid={!!bedroomCount}
                 />
             </div>
             <div className="register-room-bed-count-wrapper">
@@ -121,11 +117,12 @@ const RegisterRoomBedrooms: React.FC = () => {
                 각 침실에 놓인 침대 유형을 명시하면 숙소에 침대가 어떻게
                 구비되어 있는지 게스트가 잘 파악할 수 있습니다.
             </p>
-            <ul className="register-room-bed-type-list-wrapper">
-                {bedList.map((bedroom) => (
-                    <RegisterRoomBedTypes bedroom={bedroom} />
-                ))}
-            </ul>
+            <RegisterRoomBedList />
+            <RegisterRoomFooter
+                prevHref="/room/register/building"
+                nextHref="/room/register/bathroom"
+                isValid={!!bedroomCount}
+            />
         </Container>
     );
 };
