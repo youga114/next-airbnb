@@ -130,6 +130,12 @@ const registerRoom = createSlice({
             }
             return state;
         },
+        setBathroomCount(state, action: PayloadAction<number>) {
+            state.bathroomCount = action.payload;
+        },
+        setBathroomType(state, action: PayloadAction<"private" | "public">) {
+            state.bathroomType = action.payload;
+        },
     },
 });
 
