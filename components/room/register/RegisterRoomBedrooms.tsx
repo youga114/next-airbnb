@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import palette from "../../styles/palette";
+import palette from "../../../styles/palette";
 import { useDispatch } from "react-redux";
-import { registerRoomActions } from "../../store/registerRoom";
-import Counter from "../common/Counter";
-import { getNumber } from "../../lib/utils";
-import Selector from "../common/Selector";
-import { bedroomCountList } from "../../lib/staticData";
-import { useSelector } from "../../store";
+import { registerRoomActions } from "../../../store/registerRoom";
+import Counter from "../../common/Counter";
+import { getNumber } from "../../../lib/utils";
+import Selector from "../../common/Selector";
+import { bedroomCountList } from "../../../lib/staticData";
+import { useSelector } from "../../../store";
 import RegisterRoomBedList from "./RegisterRoomBedList";
 import RegisterRoomFooter from "./RegisterRoomFooter";
 

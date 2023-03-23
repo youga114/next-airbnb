@@ -1,14 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { bedTypes } from "../../lib/staticData";
-import { useSelector } from "../../store";
-import { registerRoomActions } from "../../store/registerRoom";
-import palette from "../../styles/palette";
-import { BedType } from "../../types/room";
-import Button from "../common/Button";
-import Counter from "../common/Counter";
-import Selector from "../common/Selector";
+import { bedTypes } from "../../../lib/staticData";
+import { registerRoomActions } from "../../../store/registerRoom";
+import palette from "../../../styles/palette";
+import { BedType } from "../../../types/room";
+import Button from "../../common/Button";
+import Counter from "../../common/Counter";
+import Selector from "../../common/Selector";
+import { useDispatch } from "react-redux";
 
 const Container = styled.li`
     width: 100%;
@@ -27,13 +26,12 @@ const Container = styled.li`
         font-size: 19px;
         color: ${palette.gray_48};
     }
-    .register-room-public-bed-type-counters {
-        width: 320px;
-        margin-top: 28px;
-    }
     .register-room-bed-type-bedroom-counts {
         font-size: 19px;
         color: ${palette.gray_76};
+    }
+    .register-room-bed-type-selector-wrapper {
+        width: 320px;
     }
     .register-room-bed-type-counter {
         width: 290px;
@@ -41,49 +39,68 @@ const Container = styled.li`
     }
 `;
 
-const RegisterRoomPublicBedTypes: React.FC = () => {
-    const [opened, setOpened] = useState(false);
-    const publicBedList = useSelector(
-        (state) => state.registerRoom.publicBedList
-    );
+interface IProps {
+    bedroom: { id: number; beds: { type: BedType; count: number }[] };
+}
 
+const RegisterRoomBedTypes: React.FC<IProps> = ({ bedroom }) => {
     const dispatch = useDispatch();
+
+    const [opened, setOpened] = useState(false);
 
     const totalBedsCount = useMemo(() => {
         let total = 0;
-        publicBedList.forEach((bed) => {
+        bedroom.beds.forEach((bed) => {
             total += bed.count;
         });
         return total;
-    }, [publicBedList]);
+    }, [bedroom]);
 
-    const bedsText = useMemo(() => {
-        const texts = publicBedList.map((bed) => `${bed.type} ${bed.count}개`);
-        return texts.join(",");
-    }, [publicBedList]);
+    const toggleOpened = () => setOpened(!opened);
 
-    const initialBedOptions = () => publicBedList.map((bed) => bed.type);
-    const [activeBedOptions, setActiveBedOptions] =
-        useState<BedType[]>(initialBedOptions);
+    const [activeBedOptions, setActiveBedOptions] = useState<BedType[]>([]);
 
     const lastBedOptions = useMemo(() => {
         return bedTypes.filter(
             (bedType) => !activeBedOptions.includes(bedType)
         );
-    }, [activeBedOptions, publicBedList]);
+    }, [activeBedOptions, bedroom]);
+
+    console.log(activeBedOptions);
+
+    const onChangeBedTypeCount = (value: number, type: BedType) =>
+        dispatch(
+            registerRoomActions.setBedTypeCount({
+                bedroomId: bedroom.id,
+                type,
+                count: value,
+            })
+        );
+
+    const initialBedOptions = bedroom.beds.map((bed) => bed.type);
+
+    const [activedBedOptions, setActivedBedOptions] =
+        useState<BedType[]>(initialBedOptions);
+
+    const bedsText = useMemo(() => {
+        const texts = bedroom.beds.map((bed) => `${bed.type} ${bed.count}개`);
+        return texts.join(",");
+    }, [bedroom]);
 
     return (
         <Container>
             <div className="register-room-bed-type-top">
-                <div>
-                    <p className="register-room-bed-type-bedroom">공용공간</p>
+                <div className="register-room-bed-type-bedroom-texts">
+                    <p className="register-room-bed-type-bedroom">
+                        {bedroom.id}번 침실
+                    </p>
                     <p className="register-room-bed-type-bedroom-counts">
                         침대 {totalBedsCount}개<br />
                         {bedsText}
                     </p>
                 </div>
                 <Button
-                    onClick={() => setOpened(!opened)}
+                    onClick={toggleOpened}
                     styleType="register"
                     color="white"
                 >
@@ -95,7 +112,7 @@ const RegisterRoomPublicBedTypes: React.FC = () => {
                 </Button>
             </div>
             {opened && (
-                <div className="register-room-public-bed-type-counters">
+                <div className="register-room-bed-type-selector-wrapper">
                     {activeBedOptions.map((type) => (
                         <div
                             className="register-room-bed-type-counter"
@@ -104,29 +121,27 @@ const RegisterRoomPublicBedTypes: React.FC = () => {
                             <Counter
                                 label={type}
                                 value={
-                                    publicBedList.find(
+                                    bedroom.beds.find(
                                         (bed) => bed.type === type
                                     )?.count || 0
                                 }
                                 key={type}
                                 onChange={(value) => {
-                                    dispatch(
-                                        registerRoomActions.setPublicBedTypeCount(
-                                            {
-                                                type,
-                                                count: value,
-                                            }
-                                        )
-                                    );
+                                    onChangeBedTypeCount(value, type);
                                 }}
                             />
                         </div>
                     ))}
+                </div>
+            )}
+            {opened && (
+                <div className="register-room-bed-type-selector-wrapper">
                     <Selector
                         type="register"
                         options={lastBedOptions}
-                        disabledOptions={["다른 침대 추가"]}
+                        defaultValue="다른 침대 추가"
                         value="다른 침대 추가"
+                        disabledOptions={["다른 침대 추가"]}
                         useValidation={false}
                         onChange={(e) =>
                             setActiveBedOptions([
@@ -141,4 +156,4 @@ const RegisterRoomPublicBedTypes: React.FC = () => {
     );
 };
 
-export default RegisterRoomPublicBedTypes;
+export default RegisterRoomBedTypes;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useSelector } from "../../store";
+import { useSelector } from "../../../store";
 import RegisterRoomBedTypes from "./RegisterRoomBedTypes";
 import RegisterRoomPublicBedTypes from "./RegisterRoomPublicBedTypes";
 
