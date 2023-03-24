@@ -96,7 +96,7 @@ const RegisterRoomBuilding: React.FC = () => {
             case "아파트": {
                 const {
                     apartmentBuildingTypeList,
-                } = require("../../lib/staticData");
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(
                         apartmentBuildingTypeList[0]
@@ -107,7 +107,7 @@ const RegisterRoomBuilding: React.FC = () => {
             case "주택": {
                 const {
                     houstBuildingTypeList,
-                } = require("../../lib/staticData");
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(
                         houstBuildingTypeList[0]
@@ -118,7 +118,7 @@ const RegisterRoomBuilding: React.FC = () => {
             case "별채": {
                 const {
                     secondaryUnitBuildingTypeList,
-                } = require("../../lib/staticData");
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(
                         secondaryUnitBuildingTypeList[0]
@@ -129,7 +129,7 @@ const RegisterRoomBuilding: React.FC = () => {
             case "독특한 숙소": {
                 const {
                     uniqueSpaceBuildingTypeList,
-                } = require("../../lib/staticData");
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(
                         uniqueSpaceBuildingTypeList[0]
@@ -138,7 +138,9 @@ const RegisterRoomBuilding: React.FC = () => {
                 return uniqueSpaceBuildingTypeList;
             }
             case "B&B": {
-                const { bnbBuildingTypeList } = require("../../lib/staticData");
+                const {
+                    bnbBuildingTypeList,
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(bnbBuildingTypeList[0])
                 );
@@ -147,7 +149,7 @@ const RegisterRoomBuilding: React.FC = () => {
             case "부티크호텔": {
                 const {
                     boutiquesHotelBuildingTypeList,
-                } = require("../../lib/staticData");
+                } = require("../../../lib/staticData");
                 dispatch(
                     registerRoomActions.setBuildingType(
                         boutiquesHotelBuildingTypeList[0]
