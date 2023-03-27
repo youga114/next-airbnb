@@ -25,6 +25,7 @@ type RegisterRoomState = {
     conveniences: string[];
     photos: string[];
     description: string;
+    title: string;
 };
 
 const initialState: RegisterRoomState = {
@@ -55,6 +56,7 @@ const initialState: RegisterRoomState = {
         "https://newbie-bucket.s3.ap-northeast-2.amazonaws.com/539d0d93111f8b5f4acec9201",
     ],
     description: "",
+    title: "",
 };
 
 const registerRoom = createSlice({
@@ -199,6 +201,9 @@ const registerRoom = createSlice({
         },
         setDescription(state, action: PayloadAction<string>) {
             state.description = action.payload;
+        },
+        setTitle(state, action: PayloadAction<string>) {
+            state.title = action.payload;
         },
     },
 });
