@@ -17,3 +17,7 @@ export const getNumber = (string: string) => {
     }
     return null;
 };
+
+export const makeMoneyString = (string: string) => {
+    return string.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+};
