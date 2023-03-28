@@ -9,12 +9,14 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import common from "./common";
 import auth from "./auth";
 import registerRoom from "./registerRoom";
+import searchRoom from "./searchRoom";
 
 const rootReducer = combineReducers({
     common: common.reducer,
     user: user.reducer,
     auth: auth.reducer,
     registerRoom: registerRoom.reducer,
+    searchRoom: searchRoom.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
