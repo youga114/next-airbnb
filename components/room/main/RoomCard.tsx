@@ -7,7 +7,7 @@ import palette from "../../../styles/palette";
 import { useSelector } from "../../../store";
 import { makeMoneyString } from "../../../lib/utils";
 
-const Container = styled.li<{ showMap?: boolean }>`
+const Container = styled.li<{ showMap: boolean }>`
     width: calc((100% -48px) / 4);
     &:nth-child(4n) {
         margin-right: 0;
@@ -132,7 +132,7 @@ const Container = styled.li<{ showMap?: boolean }>`
 
 interface IProps {
     room: RoomType;
-    showMap?: boolean;
+    showMap: boolean;
 }
 
 const RoomCard: React.FC<IProps> = ({ room, showMap }) => {
