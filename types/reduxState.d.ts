@@ -1,3 +1,4 @@
+import { RoomType } from "./room";
 import { UserType } from "./user";
 
 export type UserState = UserType & {

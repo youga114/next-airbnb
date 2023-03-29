@@ -7,6 +7,7 @@ import { RoomType } from "../../../types/room";
 import RoomDetailPhotos from "./RoomDetailPhotos";
 import BedIcon from "../../../public/static/svg/room/bed.svg";
 import RoomAmentityIcon from "./RoomAmentityIcon";
+import RoomDetailReservation from "./RoomDetailReservation";
 
 const Container = styled.div`
     width: 1120px;
@@ -200,7 +201,7 @@ const RoomDetail: React.FC = () => {
                         </>
                     )}
                 </div>
-                {/* <RoomDetailReservation /> */}
+                <RoomDetailReservation />
             </section>
         </Container>
     );
